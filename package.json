@@ -2,6 +2,7 @@
   "name": "vue_weather",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://DaryaGrygorova.github.io/Vue_weather/",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
