@@ -1,12 +1,20 @@
 <script lang="ts" setup>
-import { defineProps, computed } from 'vue';
-import { WeatherInfo } from '../types/types'
-import { getPressureMm, getTime } from '../utils'
+import { defineProps, computed } from "vue";
+import { WeatherInfo } from "../types/types";
+import { getPressureMm, getTime } from "../utils";
 
 const props = defineProps<{ weatherInfo: WeatherInfo }>();
 
-const sunriseTime = computed(() => props.weatherInfo ? getTime(props.weatherInfo?.sys?.sunrise + props.weatherInfo?.timezone) : '-')
-const sunsetTime = computed(() => props.weatherInfo ? getTime(props.weatherInfo?.sys?.sunset + props.weatherInfo?.timezone) : '-')
+const sunriseTime = computed(() =>
+  props.weatherInfo
+    ? getTime(props.weatherInfo?.sys?.sunrise + props.weatherInfo?.timezone)
+    : "-"
+);
+const sunsetTime = computed(() =>
+  props.weatherInfo
+    ? getTime(props.weatherInfo?.sys?.sunset + props.weatherInfo?.timezone)
+    : "-"
+);
 </script>
 
 <template>
@@ -20,7 +28,7 @@ const sunsetTime = computed(() => props.weatherInfo ? getTime(props.weatherInfo?
           <div class="card-info">
             <div class="card-justify">
               <div class="info-main">
-                <div class="info-main-num">{{weatherInfo.wind.speed}}</div>
+                <div class="info-main-num">{{ weatherInfo.wind.speed }}</div>
                 <div class="info-main-text">m/s</div>
               </div>
               <div class="info-main">
@@ -34,12 +42,14 @@ const sunsetTime = computed(() => props.weatherInfo ? getTime(props.weatherInfo?
           <div class="card-small-title">Wind gusts</div>
           <div class="card-small-info">
             <div v-if="weatherInfo.wind.gust" class="card-small-data">
-              <div class="info-main-num">{{ Math.round(weatherInfo.wind.gust) }}</div>
+              <div class="info-main-num">
+                {{ Math.round(weatherInfo.wind.gust) }}
+              </div>
               <div class="info-main-text">m/s</div>
             </div>
             <div class="card-small-hint">
               <div class="card-small-pic card-small-pic--wind"></div>
-              <div class="card-small-text text-egorova">
+              <div class="card-small-text">
                 Learn
                 <a
                   href="https://www.windy.com/articles/weather-phenomena-what-s-the-difference-between-sustained-winds-and-wind-gusts-10390?satellite,7.787,115.115,5"
@@ -59,7 +69,9 @@ const sunsetTime = computed(() => props.weatherInfo ? getTime(props.weatherInfo?
           <div class="card-info">
             <div class="card-centered">
               <div class="info-main">
-                <div class="info-main-num">{{ getPressureMm(weatherInfo.main.pressure) }}</div>
+                <div class="info-main-num">
+                  {{ getPressureMm(weatherInfo.main.pressure) }}
+                </div>
                 <div class="info-main-text">mm</div>
               </div>
             </div>
@@ -69,7 +81,9 @@ const sunsetTime = computed(() => props.weatherInfo ? getTime(props.weatherInfo?
           <div class="card-small-title">Feels like</div>
           <div class="card-small-info">
             <div class="card-small-data">
-              <div class="info-main-num">{{ Math.round(weatherInfo.main.feels_like) }}</div>
+              <div class="info-main-num">
+                {{ Math.round(weatherInfo.main.feels_like) }}
+              </div>
               <div class="info-main-text">°C</div>
             </div>
             <div class="card-small-hint">

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import WeatherInfo from "../components/weather-info-comp.vue";
-import { Coord, WeatherInfo as WeatherInfoType} from "../types/types";
+import { Coord, WeatherInfo as WeatherInfoType } from "../types/types";
 import Highlights from "../components/highlights-comp.vue";
 import Coords from "../components/coords-comp.vue";
 import Humidity from "../components/humidity-comp.vue";
@@ -11,14 +11,14 @@ import { capitalizeFirstChar } from "@/utils";
 
 const city = ref("Kyiv");
 const weatherInfo = ref({} as WeatherInfoType);
-const isError = computed(()=> weatherInfo.value?.cod !== 200)
+const isError = computed(() => weatherInfo.value?.cod !== 200);
 
 function getWeatherInfo() {
   fetch(`${BASE_URL}?q=${city.value}&units=metric&appid=${API_KEY}`)
     .then((res) => res.json())
     .then((data: WeatherInfoType | null) => (weatherInfo.value = data));
 }
-onMounted(getWeatherInfo)
+onMounted(getWeatherInfo);
 </script>
 
 <template>
@@ -27,7 +27,9 @@ onMounted(getWeatherInfo)
       <div class="container">
         <div class="laptop">
           <div class="sections">
-            <section :class="['section', 'section-left', {'section-error': isError}]">
+            <section
+              :class="['section', 'section-left', { 'section-error': isError }]"
+            >
               <div class="info">
                 <div class="city-inner">
                   <input
@@ -37,27 +39,27 @@ onMounted(getWeatherInfo)
                     class="search"
                   />
                 </div>
-                <WeatherInfo v-if='!isError' :weatherInfo="weatherInfo"/>
+                <WeatherInfo v-if="!isError" :weatherInfo="weatherInfo" />
                 <div v-else class="error">
                   <div v-if="weatherInfo?.message" class="error-message">
                     {{ capitalizeFirstChar(weatherInfo?.message) }}
                   </div>
                   <div v-else class="error-title">
-                    Ooops! <br>Something went wrong!!!
+                    Ooops! <br />Something went wrong!!!
                   </div>
                 </div>
               </div>
             </section>
-            <section v-if='!isError' class="section section-right">
-              <Highlights :weatherInfo="weatherInfo"/>
+            <section v-if="!isError" class="section section-right">
+              <Highlights :weatherInfo="weatherInfo" />
             </section>
           </div>
-          <div v-if='!isError' class="sections">
+          <div v-if="!isError" class="sections">
             <section class="section-bottom">
-              <Coords :coord="weatherInfo?.coord || {} as Coord"/>
+              <Coords :coord="weatherInfo?.coord || {} as Coord" />
             </section>
             <section class="section-bottom">
-              <Humidity :humidity="weatherInfo?.main.humidity || 0"/>
+              <Humidity :humidity="weatherInfo?.main.humidity || 0" />
             </section>
           </div>
         </div>
