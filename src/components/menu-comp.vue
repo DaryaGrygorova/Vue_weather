@@ -1,21 +1,27 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
+    <router-link to="/">About</router-link>
     <router-link to="/weather">Weather</router-link>
   </nav>
   <router-view />
 </template>
 
 <style lang="scss" scoped>
+@import "@/assets/styles/main.scss";
+
 nav {
   padding: 30px;
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: $text-primary;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: $text-accent;
+    }
+
+    &:not(:last-child) {
+      margin-right: 20px;
     }
   }
 }
